@@ -1,0 +1,629 @@
+USE [master]
+GO
+/****** Object:  Database [public_transport_2]    Script Date: 29.11.2023 11:29:04 ******/
+CREATE DATABASE [public_transport_2]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'public_transport_2', FILENAME = N'D:\Msserver\MSSQL16.MSSQLSERVER\MSSQL\DATA\public_transport_2.mdf' , SIZE = 73728KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'public_transport_2_log', FILENAME = N'D:\Msserver\MSSQL16.MSSQLSERVER\MSSQL\DATA\public_transport_2_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT, LEDGER = OFF
+GO
+ALTER DATABASE [public_transport_2] SET COMPATIBILITY_LEVEL = 160
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [public_transport_2].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [public_transport_2] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [public_transport_2] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [public_transport_2] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [public_transport_2] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [public_transport_2] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [public_transport_2] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [public_transport_2] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [public_transport_2] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [public_transport_2] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [public_transport_2] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [public_transport_2] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [public_transport_2] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [public_transport_2] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [public_transport_2] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [public_transport_2] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [public_transport_2] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [public_transport_2] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [public_transport_2] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [public_transport_2] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [public_transport_2] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [public_transport_2] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [public_transport_2] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [public_transport_2] SET RECOVERY FULL 
+GO
+ALTER DATABASE [public_transport_2] SET  MULTI_USER 
+GO
+ALTER DATABASE [public_transport_2] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [public_transport_2] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [public_transport_2] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [public_transport_2] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [public_transport_2] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [public_transport_2] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'public_transport_2', N'ON'
+GO
+ALTER DATABASE [public_transport_2] SET QUERY_STORE = ON
+GO
+ALTER DATABASE [public_transport_2] SET QUERY_STORE (OPERATION_MODE = READ_WRITE, CLEANUP_POLICY = (STALE_QUERY_THRESHOLD_DAYS = 30), DATA_FLUSH_INTERVAL_SECONDS = 900, INTERVAL_LENGTH_MINUTES = 60, MAX_STORAGE_SIZE_MB = 1000, QUERY_CAPTURE_MODE = AUTO, SIZE_BASED_CLEANUP_MODE = AUTO, MAX_PLANS_PER_QUERY = 200, WAIT_STATS_CAPTURE_MODE = ON)
+GO
+USE [public_transport_2]
+GO
+/****** Object:  Table [dbo].[ability]    Script Date: 29.11.2023 11:29:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ability](
+	[id] [int] NOT NULL,
+	[ability] [varchar](50) NULL,
+ CONSTRAINT [PK_ability] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[account]    Script Date: 29.11.2023 11:29:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[account](
+	[id] [int] NOT NULL,
+	[login] [varchar](50) NULL,
+	[password] [varchar](50) NULL,
+	[id_company] [int] NULL,
+	[id_role] [int] NULL,
+	[id_emploee] [int] NULL,
+ CONSTRAINT [PK_person] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[bankAccount]    Script Date: 29.11.2023 11:29:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[bankAccount](
+	[id] [int] NOT NULL,
+	[number] [bigint] NULL,
+	[ccv] [int] NULL,
+ CONSTRAINT [PK_bankAccount] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[change]    Script Date: 29.11.2023 11:29:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[change](
+	[id] [int] NOT NULL,
+	[id_schedule] [int] NULL,
+	[date] [date] NULL,
+	[time] [time](7) NULL,
+	[reason] [varchar](50) NULL,
+ CONSTRAINT [PK_change] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[company]    Script Date: 29.11.2023 11:29:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[company](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](50) NULL,
+ CONSTRAINT [PK_company] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[employee]    Script Date: 29.11.2023 11:29:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[employee](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [int] NULL,
+	[sername] [int] NULL,
+	[middlename] [int] NULL,
+	[id_position] [int] NULL,
+	[id_company] [int] NULL,
+	[id_bank_account] [int] NULL,
+ CONSTRAINT [PK_employee] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[late_flights]    Script Date: 29.11.2023 11:29:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[late_flights](
+	[number] [varchar](50) NULL,
+	[date] [date] NULL,
+	[reason] [varchar](255) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[middlename]    Script Date: 29.11.2023 11:29:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[middlename](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](50) NULL,
+ CONSTRAINT [PK_middlename] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[name]    Script Date: 29.11.2023 11:29:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[name](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](50) NULL,
+ CONSTRAINT [PK_name] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[passanger]    Script Date: 29.11.2023 11:29:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[passanger](
+	[id] [int] NULL,
+	[name] [int] NULL,
+	[sername] [int] NULL,
+	[middlename] [int] NULL,
+	[id_bank_account] [int] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[position]    Script Date: 29.11.2023 11:29:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[position](
+	[id] [int] NOT NULL,
+	[name] [varchar](50) NULL,
+ CONSTRAINT [PK_position] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[price]    Script Date: 29.11.2023 11:29:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[price](
+	[id] [int] NOT NULL,
+	[price] [float] NULL,
+ CONSTRAINT [PK_price] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[role]    Script Date: 29.11.2023 11:29:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[role](
+	[id] [int] NOT NULL,
+	[name] [varchar](50) NULL,
+ CONSTRAINT [PK_role] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[role_ability]    Script Date: 29.11.2023 11:29:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[role_ability](
+	[id_role] [int] NULL,
+	[id_ability] [int] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[route]    Script Date: 29.11.2023 11:29:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[route](
+	[id] [int] NOT NULL,
+	[number] [varchar](15) NULL,
+	[start_area] [int] NULL,
+	[end_area] [int] NULL,
+	[total_traver_time] [time](7) NULL,
+	[id_company] [int] NULL,
+	[id_transport_type] [int] NULL,
+	[distanse] [float] NULL,
+ CONSTRAINT [PK_Route] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[schedule]    Script Date: 29.11.2023 11:29:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[schedule](
+	[id] [int] NOT NULL,
+	[id_route] [int] NULL,
+	[arrival_time] [time](7) NULL,
+	[departure_time] [time](7) NULL,
+	[date] [date] NULL,
+ CONSTRAINT [PK_schedule] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[scheduleEmployee]    Script Date: 29.11.2023 11:29:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[scheduleEmployee](
+	[id] [int] NOT NULL,
+	[id_schedule] [int] NULL,
+	[id_employee] [int] NULL,
+ CONSTRAINT [PK_scheduleEmployee] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[sername]    Script Date: 29.11.2023 11:29:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[sername](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](50) NULL,
+ CONSTRAINT [PK_sername] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[stop]    Script Date: 29.11.2023 11:29:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[stop](
+	[id] [int] NOT NULL,
+	[name] [varchar](50) NULL,
+	[location] [varchar](50) NULL,
+	[has_shalter] [bit] NULL,
+ CONSTRAINT [PK_stop] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[stop_rout]    Script Date: 29.11.2023 11:29:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[stop_rout](
+	[id_stop] [int] NULL,
+	[id_rout] [int] NULL,
+	[serial_num] [int] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ticket]    Script Date: 29.11.2023 11:29:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ticket](
+	[id] [int] NOT NULL,
+	[id_travel] [int] NULL,
+	[id_bank_account] [int] NULL,
+	[id_price] [int] NULL,
+ CONSTRAINT [PK_ticket] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[transport]    Script Date: 29.11.2023 11:29:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[transport](
+	[id] [int] NOT NULL,
+	[id_transport_type] [int] NULL,
+ CONSTRAINT [PK_transport] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[transportType]    Script Date: 29.11.2023 11:29:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[transportType](
+	[id] [int] NOT NULL,
+	[name] [varchar](50) NULL,
+ CONSTRAINT [PK_transportType] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[travel]    Script Date: 29.11.2023 11:29:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[travel](
+	[id] [int] NOT NULL,
+	[id_route] [int] NULL,
+	[id_schedule] [int] NULL,
+	[id_party] [int] NULL,
+	[id_transport] [int] NULL,
+ CONSTRAINT [PK_travel] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[travelParty]    Script Date: 29.11.2023 11:29:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[travelParty](
+	[id] [int] NOT NULL,
+	[id_employee] [int] NULL,
+ CONSTRAINT [PK_travelParty] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[account]  WITH CHECK ADD  CONSTRAINT [FK_account_company] FOREIGN KEY([id_role])
+REFERENCES [dbo].[company] ([id])
+GO
+ALTER TABLE [dbo].[account] CHECK CONSTRAINT [FK_account_company]
+GO
+ALTER TABLE [dbo].[account]  WITH CHECK ADD  CONSTRAINT [FK_account_employee] FOREIGN KEY([id_emploee])
+REFERENCES [dbo].[employee] ([id])
+GO
+ALTER TABLE [dbo].[account] CHECK CONSTRAINT [FK_account_employee]
+GO
+ALTER TABLE [dbo].[account]  WITH CHECK ADD  CONSTRAINT [FK_account_role] FOREIGN KEY([id_role])
+REFERENCES [dbo].[role] ([id])
+GO
+ALTER TABLE [dbo].[account] CHECK CONSTRAINT [FK_account_role]
+GO
+ALTER TABLE [dbo].[account]  WITH CHECK ADD  CONSTRAINT [FK_account_role1] FOREIGN KEY([id_role])
+REFERENCES [dbo].[role] ([id])
+GO
+ALTER TABLE [dbo].[account] CHECK CONSTRAINT [FK_account_role1]
+GO
+ALTER TABLE [dbo].[change]  WITH CHECK ADD  CONSTRAINT [FK_change_schedule] FOREIGN KEY([id_schedule])
+REFERENCES [dbo].[schedule] ([id])
+GO
+ALTER TABLE [dbo].[change] CHECK CONSTRAINT [FK_change_schedule]
+GO
+ALTER TABLE [dbo].[employee]  WITH CHECK ADD  CONSTRAINT [FK_employee_bankAccount] FOREIGN KEY([id_bank_account])
+REFERENCES [dbo].[bankAccount] ([id])
+GO
+ALTER TABLE [dbo].[employee] CHECK CONSTRAINT [FK_employee_bankAccount]
+GO
+ALTER TABLE [dbo].[employee]  WITH CHECK ADD  CONSTRAINT [FK_employee_company] FOREIGN KEY([id_company])
+REFERENCES [dbo].[company] ([id])
+GO
+ALTER TABLE [dbo].[employee] CHECK CONSTRAINT [FK_employee_company]
+GO
+ALTER TABLE [dbo].[employee]  WITH CHECK ADD  CONSTRAINT [FK_employee_middlename] FOREIGN KEY([middlename])
+REFERENCES [dbo].[middlename] ([id])
+GO
+ALTER TABLE [dbo].[employee] CHECK CONSTRAINT [FK_employee_middlename]
+GO
+ALTER TABLE [dbo].[employee]  WITH CHECK ADD  CONSTRAINT [FK_employee_name] FOREIGN KEY([name])
+REFERENCES [dbo].[name] ([id])
+GO
+ALTER TABLE [dbo].[employee] CHECK CONSTRAINT [FK_employee_name]
+GO
+ALTER TABLE [dbo].[employee]  WITH CHECK ADD  CONSTRAINT [FK_employee_position] FOREIGN KEY([id_position])
+REFERENCES [dbo].[position] ([id])
+GO
+ALTER TABLE [dbo].[employee] CHECK CONSTRAINT [FK_employee_position]
+GO
+ALTER TABLE [dbo].[employee]  WITH CHECK ADD  CONSTRAINT [FK_employee_sername] FOREIGN KEY([sername])
+REFERENCES [dbo].[sername] ([id])
+GO
+ALTER TABLE [dbo].[employee] CHECK CONSTRAINT [FK_employee_sername]
+GO
+ALTER TABLE [dbo].[passanger]  WITH CHECK ADD  CONSTRAINT [FK_passanger_bankAccount] FOREIGN KEY([id_bank_account])
+REFERENCES [dbo].[bankAccount] ([id])
+GO
+ALTER TABLE [dbo].[passanger] CHECK CONSTRAINT [FK_passanger_bankAccount]
+GO
+ALTER TABLE [dbo].[passanger]  WITH CHECK ADD  CONSTRAINT [FK_passanger_middlename] FOREIGN KEY([middlename])
+REFERENCES [dbo].[middlename] ([id])
+GO
+ALTER TABLE [dbo].[passanger] CHECK CONSTRAINT [FK_passanger_middlename]
+GO
+ALTER TABLE [dbo].[passanger]  WITH CHECK ADD  CONSTRAINT [FK_passanger_name] FOREIGN KEY([name])
+REFERENCES [dbo].[name] ([id])
+GO
+ALTER TABLE [dbo].[passanger] CHECK CONSTRAINT [FK_passanger_name]
+GO
+ALTER TABLE [dbo].[passanger]  WITH CHECK ADD  CONSTRAINT [FK_passanger_sername] FOREIGN KEY([sername])
+REFERENCES [dbo].[sername] ([id])
+GO
+ALTER TABLE [dbo].[passanger] CHECK CONSTRAINT [FK_passanger_sername]
+GO
+ALTER TABLE [dbo].[role_ability]  WITH CHECK ADD  CONSTRAINT [FK_role_ability_ability] FOREIGN KEY([id_ability])
+REFERENCES [dbo].[ability] ([id])
+GO
+ALTER TABLE [dbo].[role_ability] CHECK CONSTRAINT [FK_role_ability_ability]
+GO
+ALTER TABLE [dbo].[role_ability]  WITH CHECK ADD  CONSTRAINT [FK_role_ability_role] FOREIGN KEY([id_role])
+REFERENCES [dbo].[role] ([id])
+GO
+ALTER TABLE [dbo].[role_ability] CHECK CONSTRAINT [FK_role_ability_role]
+GO
+ALTER TABLE [dbo].[route]  WITH CHECK ADD  CONSTRAINT [FK_route_company] FOREIGN KEY([id_company])
+REFERENCES [dbo].[company] ([id])
+GO
+ALTER TABLE [dbo].[route] CHECK CONSTRAINT [FK_route_company]
+GO
+ALTER TABLE [dbo].[route]  WITH CHECK ADD  CONSTRAINT [FK_route_stop] FOREIGN KEY([start_area])
+REFERENCES [dbo].[stop] ([id])
+GO
+ALTER TABLE [dbo].[route] CHECK CONSTRAINT [FK_route_stop]
+GO
+ALTER TABLE [dbo].[route]  WITH CHECK ADD  CONSTRAINT [FK_route_stop1] FOREIGN KEY([end_area])
+REFERENCES [dbo].[stop] ([id])
+GO
+ALTER TABLE [dbo].[route] CHECK CONSTRAINT [FK_route_stop1]
+GO
+ALTER TABLE [dbo].[route]  WITH CHECK ADD  CONSTRAINT [FK_route_transportType] FOREIGN KEY([id_transport_type])
+REFERENCES [dbo].[transportType] ([id])
+GO
+ALTER TABLE [dbo].[route] CHECK CONSTRAINT [FK_route_transportType]
+GO
+ALTER TABLE [dbo].[schedule]  WITH CHECK ADD  CONSTRAINT [FK_schedule_route] FOREIGN KEY([id_route])
+REFERENCES [dbo].[route] ([id])
+GO
+ALTER TABLE [dbo].[schedule] CHECK CONSTRAINT [FK_schedule_route]
+GO
+ALTER TABLE [dbo].[scheduleEmployee]  WITH CHECK ADD  CONSTRAINT [FK_scheduleEmployee_employee] FOREIGN KEY([id_employee])
+REFERENCES [dbo].[employee] ([id])
+GO
+ALTER TABLE [dbo].[scheduleEmployee] CHECK CONSTRAINT [FK_scheduleEmployee_employee]
+GO
+ALTER TABLE [dbo].[scheduleEmployee]  WITH CHECK ADD  CONSTRAINT [FK_scheduleEmployee_schedule] FOREIGN KEY([id_schedule])
+REFERENCES [dbo].[schedule] ([id])
+GO
+ALTER TABLE [dbo].[scheduleEmployee] CHECK CONSTRAINT [FK_scheduleEmployee_schedule]
+GO
+ALTER TABLE [dbo].[stop_rout]  WITH CHECK ADD  CONSTRAINT [FK_stop_rout_route] FOREIGN KEY([id_rout])
+REFERENCES [dbo].[route] ([id])
+GO
+ALTER TABLE [dbo].[stop_rout] CHECK CONSTRAINT [FK_stop_rout_route]
+GO
+ALTER TABLE [dbo].[stop_rout]  WITH CHECK ADD  CONSTRAINT [FK_stop_rout_stop] FOREIGN KEY([id_stop])
+REFERENCES [dbo].[stop] ([id])
+GO
+ALTER TABLE [dbo].[stop_rout] CHECK CONSTRAINT [FK_stop_rout_stop]
+GO
+ALTER TABLE [dbo].[ticket]  WITH CHECK ADD  CONSTRAINT [FK_ticket_bankAccount] FOREIGN KEY([id_bank_account])
+REFERENCES [dbo].[bankAccount] ([id])
+GO
+ALTER TABLE [dbo].[ticket] CHECK CONSTRAINT [FK_ticket_bankAccount]
+GO
+ALTER TABLE [dbo].[ticket]  WITH CHECK ADD  CONSTRAINT [FK_ticket_price] FOREIGN KEY([id_price])
+REFERENCES [dbo].[price] ([id])
+GO
+ALTER TABLE [dbo].[ticket] CHECK CONSTRAINT [FK_ticket_price]
+GO
+ALTER TABLE [dbo].[ticket]  WITH CHECK ADD  CONSTRAINT [FK_ticket_travel] FOREIGN KEY([id_travel])
+REFERENCES [dbo].[travel] ([id])
+GO
+ALTER TABLE [dbo].[ticket] CHECK CONSTRAINT [FK_ticket_travel]
+GO
+ALTER TABLE [dbo].[transport]  WITH CHECK ADD  CONSTRAINT [FK_transport_transportType] FOREIGN KEY([id_transport_type])
+REFERENCES [dbo].[transportType] ([id])
+GO
+ALTER TABLE [dbo].[transport] CHECK CONSTRAINT [FK_transport_transportType]
+GO
+ALTER TABLE [dbo].[travel]  WITH CHECK ADD  CONSTRAINT [FK_travel_route] FOREIGN KEY([id_route])
+REFERENCES [dbo].[route] ([id])
+GO
+ALTER TABLE [dbo].[travel] CHECK CONSTRAINT [FK_travel_route]
+GO
+ALTER TABLE [dbo].[travel]  WITH CHECK ADD  CONSTRAINT [FK_travel_transport] FOREIGN KEY([id_transport])
+REFERENCES [dbo].[transport] ([id])
+GO
+ALTER TABLE [dbo].[travel] CHECK CONSTRAINT [FK_travel_transport]
+GO
+ALTER TABLE [dbo].[travel]  WITH CHECK ADD  CONSTRAINT [FK_travel_travelParty] FOREIGN KEY([id_party])
+REFERENCES [dbo].[travelParty] ([id])
+GO
+ALTER TABLE [dbo].[travel] CHECK CONSTRAINT [FK_travel_travelParty]
+GO
+ALTER TABLE [dbo].[travelParty]  WITH CHECK ADD  CONSTRAINT [FK_travelParty_employee] FOREIGN KEY([id_employee])
+REFERENCES [dbo].[employee] ([id])
+GO
+ALTER TABLE [dbo].[travelParty] CHECK CONSTRAINT [FK_travelParty_employee]
+GO
+USE [master]
+GO
+ALTER DATABASE [public_transport_2] SET  READ_WRITE 
+GO
