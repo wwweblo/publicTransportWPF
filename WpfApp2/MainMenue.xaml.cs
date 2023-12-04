@@ -31,28 +31,42 @@ namespace WpfApp2
             this.connection = connection;
         }
 
+        //Пользователи
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            userWindow uw = new userWindow(currentUser);
-            uw.Show();
+            if (currentUser.idRole == 2 || currentUser.idRole == 1)
+            {
+                userWindow uw = new userWindow(currentUser);
+                uw.Show();
+            }
         }
-
+        //Маршруты
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            routeWindow routeWindow = new routeWindow(currentUser);
-            routeWindow.Show();
+            if (currentUser.idRole == 4 || currentUser.idRole == 2 || currentUser.idRole == 1)
+            {
+                routeWindow routeWindow = new routeWindow(currentUser);
+                routeWindow.Show();
+            }
         }
 
+        //Компании
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            companyWindow companyWindow = new companyWindow(currentUser);
-            companyWindow.Show();
+            if (currentUser.idRole == 1)
+            {
+                companyWindow companyWindow = new companyWindow(currentUser);
+                companyWindow.Show();
+            }
         }
-
+        //аккаунты
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            accountWindow accountWindow = new accountWindow(currentUser);
-            accountWindow.Show();
+            if (currentUser.idRole == 1)
+            {
+                accountWindow accountWindow = new accountWindow(currentUser);
+                accountWindow.Show();
+            }
         }
     }
 }

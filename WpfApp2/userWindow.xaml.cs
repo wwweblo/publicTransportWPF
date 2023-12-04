@@ -153,7 +153,7 @@ namespace WpfApp2
                         break;
 
                     // Оператор
-                    case 4:
+                    case 2:
                         query = "SELECT employee.id, name.name, sername.name AS sername, middlename.name AS middlename, position.name AS position, company.name AS company FROM employee" +
                                 " JOIN name ON employee.name = name.id" +
                                 " JOIN sername ON employee.sername =  sername.id" +

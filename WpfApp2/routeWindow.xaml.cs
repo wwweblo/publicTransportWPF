@@ -185,7 +185,7 @@ namespace WpfApp2
                                 $" JOIN stop AS end_stop ON route.end_area = end_stop.id" +
                                 $" JOIN company ON route.id_company = company.id" +
                                 $" JOIN transportType ON route.id_transport_type = transportType.id" +
-                                $" WHERE employee.id_company = {currentUser.idCompany}";
+                                $" WHERE route.id_company = {currentUser.idCompany}";
 
                         // Добавлен запрос к таблице company для получения названия компании по idCompany
                         companyQuery = $"SELECT name FROM company WHERE id = {currentUser.idCompany}";
@@ -200,7 +200,7 @@ namespace WpfApp2
                                 $" JOIN stop AS end_stop ON route.end_area = end_stop.id" +
                                 $" JOIN company ON route.id_company = company.id" +
                                 $" JOIN transportType ON route.id_transport_type = transportType.id" +
-                                $" WHERE employee.id_company = {currentUser.idCompany}";
+                                $" WHERE route.id_company = {currentUser.idCompany}";
 
                         // Добавлен запрос к таблице company для получения названия компании по idCompany
                         companyQuery = $"SELECT name FROM company WHERE id = {currentUser.idCompany}";

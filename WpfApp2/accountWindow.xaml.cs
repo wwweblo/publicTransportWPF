@@ -85,7 +85,7 @@ namespace WpfApp2
             {
                 string updateQuery = $"UPDATE account SET login = '{login}', password = '{password}'," +
                     $" id_company = (SELECT id FROM company WHERE name = '{company}')," +
-                    $" id_role = (SELECT id FROM role WHERE name = '{role}'," +
+                    $" id_role = (SELECT id FROM role WHERE name = '{role}')," +
                     $" id_employee = {id_employee}" +
                     $" WHERE id = {id}";
 
@@ -95,7 +95,11 @@ namespace WpfApp2
             else
             {
                 string insertQuery = $"INSERT INTO account (login, password, id_company, id_role, id_employee)" +
-                    $" VALUES ('{login}', '{password}', {company}, {role}, {id_employee})";
+                                    $"VALUES ('{login}', '{password}'," +
+                                    $" (SELECT id FROM company WHERE name = {company})," +
+                                    $" (SELECT id FROM role WHERE name = {role})," +
+                                    $" (SELECT id FROM employee WHERE id = {id_employee}))";
+                    
 
                 SqlCommand insertCommand = new SqlCommand(insertQuery, connection);
                 insertCommand.ExecuteNonQuery();
