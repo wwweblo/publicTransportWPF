@@ -55,14 +55,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="accountWindow.xaml.cs">
+      <DependentUpon>accountWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="companyWindow.xaml.cs">
+      <DependentUpon>companyWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="employee.cs" />
     <Compile Include="MainMenue.xaml.cs">
       <DependentUpon>MainMenue.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="routeWindow.xaml.cs">
+      <DependentUpon>routeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="user.cs" />
     <Compile Include="userWindow.xaml.cs">
       <DependentUpon>userWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="accountWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="companyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainMenue.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -79,6 +96,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="routeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="userWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

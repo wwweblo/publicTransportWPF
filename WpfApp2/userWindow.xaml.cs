@@ -171,7 +171,6 @@ namespace WpfApp2
                 {
                     if (currentUser.idRole == 4)
                     {
-                        connection.Open();
 
                         // Отключаем редактирование companyBox
                         companyBox.IsReadOnly = true;

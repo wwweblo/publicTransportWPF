@@ -45,9 +45,10 @@
             <TextBlock x:Name="userInfoLabel" TextWrapping="Wrap" Text="user_info" Margin="20,9,0,11"/>
         </Border>
 
-        <Button Content="Маршруты" HorizontalAlignment="Center" Margin="0,125,0,0" VerticalAlignment="Top" Height="41" Width="98"/>
+        <Button Content="Маршруты" HorizontalAlignment="Center" Margin="0,125,0,0" VerticalAlignment="Top" Height="41" Width="98" Click="Button_Click_1"/>
         <Button Content="Пользователи" HorizontalAlignment="Center" Margin="0,171,0,0" VerticalAlignment="Top" Height="41" Width="98" Click="Button_Click"/>
-        <Button Content="Компании" HorizontalAlignment="Center" Margin="0,217,0,0" VerticalAlignment="Top" Height="41" Width="98"/>
+        <Button Content="Компании" HorizontalAlignment="Center" Margin="0,217,0,0" VerticalAlignment="Top" Height="41" Width="98" Click="Button_Click_2"/>
+        <Button Content="Аккаунты" HorizontalAlignment="Center" Margin="0,263,0,0" VerticalAlignment="Top" Height="41" Width="98" Click="Button_Click_3"/>
 
 
 

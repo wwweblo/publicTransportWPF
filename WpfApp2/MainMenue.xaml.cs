@@ -29,13 +29,30 @@ namespace WpfApp2
 
             this.currentUser = currentUser;
             this.connection = connection;
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             userWindow uw = new userWindow(currentUser);
             uw.Show();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            routeWindow routeWindow = new routeWindow(currentUser);
+            routeWindow.Show();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            companyWindow companyWindow = new companyWindow(currentUser);
+            companyWindow.Show();
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            accountWindow accountWindow = new accountWindow(currentUser);
+            accountWindow.Show();
         }
     }
 }
